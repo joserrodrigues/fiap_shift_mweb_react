@@ -11,7 +11,7 @@ const DetailView = ({ toyInfo, onBackButton, latitude, longitude, google }) => {
             <Box className="contentBox">
                 <Stack spacing={2} className='box'>
                     <Typography gutterBottom variant="h2" className="text">
-                        <img src={toyInfo.mainImage} height="150" />
+                        <img src={toyInfo.mainImage} alt="Main Image" height="150" />
                     </Typography>
                     <Typography gutterBottom variant="h2" className="text">
                         {toyInfo.name}

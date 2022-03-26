@@ -4,17 +4,35 @@ import childrenImg from '../../Images/Children.png'
 import logoImg from '../../Images/Logo.png'
 import './Login.css'
 import CustomInput from '../../Components/CustomInput/CustomInput';
+import { GoogleLogin } from 'react-google-login';
 
-const LoginView = ({ onClickLogin, isLoading, login, password, setLogin, setPassword, connectMessage }) => {
+
+const LoginView = ({ onClickLogin, isLoading, login, password, setLogin, setPassword, connectMessage, responseGoogle }) => {
 
     let infoMessage = null;
     let info = (<Button variant='primary' onClick={onClickLogin}>Entrar</Button>);
+    let buttonGoogle = (
+        <div className='buttonGoogleDiv'>
+            <GoogleLogin
+                clientId={process.env.REACT_APP_GKEY}
+                buttonText="Entrar pelo Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                style={{
+                    width: 200
+                }}
+                cookiePolicy={'single_host_origin'}
+                isSignedIn={true}
+            />
+        </div>
+    );
     if (isLoading) {
         info = (
             <div className='boxProgress'>
                 <CircularProgress color="primary" size={25} />
             </div>
         )
+        buttonGoogle = null;
     }
 
     if (connectMessage !== "") {
@@ -58,8 +76,10 @@ const LoginView = ({ onClickLogin, isLoading, login, password, setLogin, setPass
                         type="password"
                         onChange={(event) => setPassword(event.target.value)}
                     />
-                    {info}
                     {infoMessage}
+                    {info}
+                    {buttonGoogle}
+
                 </Box>
             </Grid>
         </Grid>

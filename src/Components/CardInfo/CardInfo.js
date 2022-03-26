@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack, Container, CircularProgress, Grid, Typography, Button } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import './CardInfo.css'
 const CardInfo = () => {

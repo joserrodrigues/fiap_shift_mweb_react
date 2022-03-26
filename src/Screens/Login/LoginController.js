@@ -7,6 +7,7 @@ import { InfoContext } from '../../store/InfoContext';
 const LoginController = () => {
 
     const authLoginAPI = useAPI(auth.login);
+    const authLoginGoogleAPI = useAPI(auth.loginGoogle);
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
@@ -46,6 +47,33 @@ const LoginController = () => {
             })
     }
 
+    const onResponseGoogle = (info) => {
+
+        let infoSend = {
+            name: info.profileObj.name,
+            email: info.profileObj.email,
+            idGoogle: info.profileObj.googleId,
+        }
+
+        setIsLoading(true);
+        authLoginGoogleAPI.requestPromise(infoSend)
+            .then(info => {
+                setIsLoading(false);
+                context.onMakeLogin(info.token);
+            })
+            .catch((error) => {
+                setIsLoading(false);
+                setConnectCode(-1);
+                console.log(error.response);
+                if (error.response.status === 401) {
+                    setConnectMessage(error.response.data.message);
+                } else {
+                    setConnectMessage("O servidor retornou um erro= " + error.response.status);
+                }
+
+            })
+    }
+
 
     return (
         <LoginView
@@ -56,7 +84,9 @@ const LoginController = () => {
             onClickLogin={onClickLogin}
             isLoading={isLoading}
             connectMessage={connectMessage}
-            connectCode={connectCode} />
+            connectCode={connectCode}
+            responseGoogle={onResponseGoogle}
+        />
     )
 }
 

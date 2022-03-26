@@ -4,10 +4,25 @@ import { Typography, Grid, Stack } from '@mui/material';
 import logoImg from '../../Images/Logo.png'
 import './Header.css'
 
+import { useGoogleLogout } from 'react-google-login';
+
+
 const Header = () => {
 
     const context = useContext(InfoContext);
     let userInitial = context.info[0];
+
+    const onLogoutSuccess = (info) => {
+        console.log(info);
+        context.onMakeLogout()
+    }
+
+    const { signOut } = useGoogleLogout({
+        clientId: process.env.REACT_APP_GKEY,
+        onLogoutSuccess: onLogoutSuccess,
+    });
+
+
     return (
         <>
             <Grid
@@ -25,7 +40,7 @@ const Header = () => {
                             <Typography variant="h2" >
                                 Olá, {context.info}!
                             </Typography>
-                            <div className='logoutButton' onClick={() => context.onMakeLogout()}>
+                            <div className='logoutButton' onClick={() => signOut()}>
                                 <Typography variant="minSize" className='logoutButton'>
                                     Logout
                                 </Typography>
