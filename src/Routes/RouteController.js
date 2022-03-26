@@ -4,10 +4,14 @@ import LoginController from '../Screens/Login/LoginController';
 import { Routes, Route } from "react-router-dom";
 import { InfoContext } from '../store/InfoContext';
 import AddController from '../Screens/Add/AddController';
+import { getNotificationToken, onMessageListener } from '../Services/Firebase/ManageFirebase';
 
 const RouteController = () => {
 
     const { tokenLogin, onMakeLogin } = useContext(InfoContext);
+
+    getNotificationToken();
+    onMessageListener();
 
     let hasToken = false;
     if (tokenLogin === undefined || tokenLogin === null) {
