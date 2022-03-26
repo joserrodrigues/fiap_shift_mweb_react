@@ -1,6 +1,8 @@
 import * as React from 'react';
 import './Home.css'
-import { Box, Container, CircularProgress, Grid, Typography } from '@mui/material';
+import { Box, Container, CircularProgress, Grid, Typography, Button } from '@mui/material';
+import { Card, CardContent, CardMedia } from '@mui/material';
+import CardInfo from '../../Components/CardInfo/CardInfo'
 
 export default function HomeView({ loading, arrayToys, goToPage }) {
 
@@ -17,10 +19,21 @@ export default function HomeView({ loading, arrayToys, goToPage }) {
     } else if (arrayToys) {
         arrayToys.toys.forEach(toy => {
             infoBox.push(
-                <Grid key={toy._id} item lg={12} xl={12} className="itemClass">
-                    <Typography gutterBottom variant="body" className="text" onClick={() => goToPage(toy)}>
-                        Info {toy.name}
-                    </Typography>
+                <Grid key={toy._id} item sm={12} md={6} lg={2} xl={2} className="itemClass" onClick={() => goToPage(toy)}>
+                    <Card className='cardClass'>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            src={toy.mainImage}
+                            alt={toy.name}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="body2" component="div" className='titleCard'>
+                                {toy.name}
+                            </Typography>
+                            <CardInfo />
+                        </CardContent>
+                    </Card>
                 </Grid>
             )
         });
@@ -30,12 +43,16 @@ export default function HomeView({ loading, arrayToys, goToPage }) {
             <Box className="contentBox">
                 <Grid
                     container
-                    spacing={0}
-                    direction="row">
-                    <Grid item lg={12} xl={12} >
-                        <Typography gutterBottom variant="h1" className="text">
-                            Base de Brinquedos {name}
+                    spacing={3}
+                    alignItems="center"
+                >
+                    <Grid item lg={6} xl={6} className="titlePage">
+                        <Typography variant="h1" >
+                            Base de Brinquedos
                         </Typography>
+                    </Grid>
+                    <Grid item lg={6} xl={6} className="titleButton">
+                        <Button variant='primary' className='buttonClass'>Cadastrar brinquedo</Button>
                     </Grid>
                     {infoBox}
 
