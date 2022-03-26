@@ -1,12 +1,12 @@
 import * as React from 'react';
 import './Home.css'
-import { Box, Container, CircularProgress, Grid, Typography, Button } from '@mui/material';
+import { Box, Container, CircularProgress, Grid, Typography, Button, Stack } from '@mui/material';
 import { Card, CardContent, CardMedia } from '@mui/material';
 import CardInfo from '../../Components/CardInfo/CardInfo'
+import Header from '../../Components/Header/Header';
 
-export default function HomeView({ loading, arrayToys, goToPage }) {
+export default function HomeView({ loading, arrayToys, goToPage, info }) {
 
-    let name = "";
     let infoBox = [];
 
     if (loading) {
@@ -40,24 +40,27 @@ export default function HomeView({ loading, arrayToys, goToPage }) {
     }
     return (
         <Container fixed className="container" maxWidth="lg">
-            <Box className="contentBox">
-                <Grid
-                    container
-                    spacing={3}
-                    alignItems="center"
-                >
-                    <Grid item lg={6} xl={6} className="titlePage">
-                        <Typography variant="h1" >
-                            Base de Brinquedos
-                        </Typography>
-                    </Grid>
-                    <Grid item lg={6} xl={6} className="titleButton">
-                        <Button variant='primary' className='buttonClass'>Cadastrar brinquedo</Button>
-                    </Grid>
-                    {infoBox}
+            <Stack>
+                <Header />
+                <Box className="contentBox">
+                    <Grid
+                        container
+                        spacing={3}
+                        alignItems="center"
+                    >
+                        <Grid item lg={6} xl={6} className="titlePage">
+                            <Typography variant="h1" >
+                                Base de Brinquedos - {info}
+                            </Typography>
+                        </Grid>
+                        <Grid item lg={6} xl={6} className="titleButton">
+                            <Button variant='primary' className='buttonClass'>Cadastrar brinquedo</Button>
+                        </Grid>
+                        {infoBox}
 
-                </Grid>
-            </Box>
+                    </Grid>
+                </Box>
+            </Stack>
         </Container>
     );
 }

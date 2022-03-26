@@ -5,13 +5,17 @@ import reportWebVitals from './reportWebVitals';
 import MuiThemes from './Utils/Common/MuiThemes';
 import { BrowserRouter } from "react-router-dom";
 import Routes from './Routes/RouteController';
+import { InfoContextProvider } from './store/InfoContext';
+
 
 
 ReactDOM.render(
   <React.StrictMode>
     <MuiThemes>
       <BrowserRouter>
-        <Routes />
+        <InfoContextProvider>
+          <Routes />
+        </InfoContextProvider>
       </BrowserRouter>
     </MuiThemes>
   </React.StrictMode>,
