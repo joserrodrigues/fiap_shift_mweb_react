@@ -1,5 +1,6 @@
 .gridHeader{
     margin-top: -5px !important;
+    margin-bottom: 10px;
 }
 .leftHeader{
     text-align: left;
@@ -25,4 +26,10 @@
     font-size: 22px !important;
     margin-top: 7px !important;
     
+}
+
+.logoutButton{
+    cursor: pointer;
+    margin-top: 0px;
+    line-height: 14px;
 }

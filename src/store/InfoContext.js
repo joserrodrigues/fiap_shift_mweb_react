@@ -3,8 +3,10 @@ import { createContext } from "react";
 
 export const InfoContext = createContext({
     info: '',
-    hasChanged: 0,
-    onChangeInfo: () => { }
+    tokenLogin: null,
+    onChangeInfo: () => { },
+    onMakeLogin: () => { },
+    onMakeLogout: () => { },
 })
 
 const InfoReducer = (state, action) => {
@@ -12,14 +14,21 @@ const InfoReducer = (state, action) => {
     if (action.type === 'CHANGE_INFO') {
         newState.info = action.val;
         newState.hasChanged = 1;
-        return newState;
+    } else if (action.type === 'MAKE_LOGIN') {
+        localStorage.setItem("tokenLogin", action.val);
+        newState.tokenLogin = action.val;
+    } else if (action.type === 'MAKE_LOGOUT') {
+        localStorage.removeItem("tokenLogin");
+        newState.tokenLogin = null;
     }
+    return newState;
 }
 
 export const InfoContextProvider = (props) => {
 
     const [infoState, dispatch] = useReducer(InfoReducer, {
         info: 'Teste',
+        tokenLogin: null,
         hasChanged: 0,
     });
 
@@ -27,10 +36,21 @@ export const InfoContextProvider = (props) => {
         dispatch({ type: 'CHANGE_INFO', val: info })
     }
 
+    const onMakeLogin = (info) => {
+        dispatch({ type: 'MAKE_LOGIN', val: info })
+    }
+
+    const onMakeLogout = () => {
+        dispatch({ type: 'MAKE_LOGOUT' })
+    }
+
     return <InfoContext.Provider value={{
         info: infoState.info,
         hasChanged: infoState.hasChanged,
-        onChangeInfo: onSetNewInfo
+        tokenLogin: infoState.tokenLogin,
+        onChangeInfo: onSetNewInfo,
+        onMakeLogin: onMakeLogin,
+        onMakeLogout: onMakeLogout,
     }}>
         {props.children}
     </InfoContext.Provider>
