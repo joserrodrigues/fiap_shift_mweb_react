@@ -1,0 +1,14 @@
+.toysTitleCard{
+  font-weight: bold !important;  
+  height: 40px;
+}
+
+.itemClass{
+  text-align: center;
+  cursor: pointer;
+}
+
+.cardClass {
+  max-width: 345px !important;
+  border-radius: 20px !important;
+}

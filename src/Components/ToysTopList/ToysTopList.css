@@ -1,0 +1,25 @@
+.ViewOptionDiv{
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.ViewOptionSelect{
+    border: 1px solid red;;
+}
+
+.ViewOptionNotSelect{
+    border: 1px solid black;
+    
+}
+
+.toysTopButton{
+  text-align: right;
+}
+
+.buttonClass{
+  width: 220px !important;
+}
