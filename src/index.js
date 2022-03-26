@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import HomeController from './Screens/Home/HomeController';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import MuiThemes from './Utils/Common/MuiThemes';
+
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomeController />
+    <MuiThemes>
+      <HomeController />
+    </MuiThemes>
   </React.StrictMode>,
   document.getElementById('root')
 );

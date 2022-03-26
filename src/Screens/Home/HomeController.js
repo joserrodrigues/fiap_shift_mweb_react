@@ -12,11 +12,11 @@ class HomeController extends React.Component {
             count: 0
         };
 
-        setInterval(() => {
-            this.setState({
-                count: this.state.count + 1
-            })
-        }, 1000);
+        // setInterval(() => {
+        //     this.setState({
+        //         count: this.state.count + 1
+        //     })
+        // }, 1000);
     }
 
 
