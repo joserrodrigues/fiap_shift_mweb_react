@@ -2,15 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import HomeController from './Screens/Home/HomeController';
 import MuiThemes from './Utils/Common/MuiThemes';
-
+import { BrowserRouter } from "react-router-dom";
+import Routes from './Routes/RouteController';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <MuiThemes>
-      <HomeController />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </MuiThemes>
   </React.StrictMode>,
   document.getElementById('root')
