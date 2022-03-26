@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import CustomDateInput from '../CustomDateInput/CustomDateInput';
+import PropTypes from 'prop-types';
 
 const CardDetailInfoToy = ({ signInSchema, onSubmit }) => {
 
@@ -105,4 +106,8 @@ const CardDetailInfoToy = ({ signInSchema, onSubmit }) => {
     );
 };
 
+CardDetailInfoToy.propTypes = {
+    signInSchema: PropTypes.object.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+};
 export default CardDetailInfoToy;

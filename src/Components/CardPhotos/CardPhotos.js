@@ -3,7 +3,7 @@ import { Grid, Button } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import ImageCard from '../../Images/imageCard.png'
-
+import PropTypes from 'prop-types';
 import './CardPhotos.css'
 
 const CardPhotos = ({ mainImage, detailImage1, detailImage2, onChangeImage }) => {
@@ -82,6 +82,13 @@ const CardPhotos = ({ mainImage, detailImage1, detailImage2, onChangeImage }) =>
             </Grid>
         </Grid>
     );
+};
+
+CardPhotos.propTypes = {
+    mainImage: PropTypes.string,
+    detailImage1: PropTypes.string,
+    detailImage2: PropTypes.string,
+    onChangeImage: PropTypes.func.isRequired,
 };
 
 export default CardPhotos;

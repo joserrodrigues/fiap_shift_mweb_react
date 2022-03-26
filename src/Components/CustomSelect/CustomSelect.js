@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Sizes from '../../Utils/Common/Sizes';
 import Colors from '../../Utils/Common/Colors';
+import PropTypes from 'prop-types';
 
 const CustomSelect = ({ label, errorMessage, value, placeholder, hasError, onChange, list, disabled }) => {
 
@@ -76,6 +77,20 @@ const CustomSelect = ({ label, errorMessage, value, placeholder, hasError, onCha
             </FormControl>
         </div>
     );
+};
+
+CustomSelect.propTypes = {
+    label: PropTypes.string,
+    errorMessage: PropTypes.string,
+    value: PropTypes.string,
+    placeholder: PropTypes.string.isRequired,
+    hasError: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
+    list: PropTypes.arrayOf(PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired
+    })),
 };
 
 export default CustomSelect;

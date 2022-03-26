@@ -13,6 +13,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import { ptBR } from 'date-fns/locale'
 import InputAdornment from '@mui/material/InputAdornment';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PropTypes from 'prop-types';
 
 const BootstrapInput = styled(InputBase)(({ theme, error }) => {
 
@@ -59,6 +60,7 @@ const CustomDateInput = ({ label, errorMessage, onChange, value, placeholder, ha
         }
 
     }
+
     let colorLabel = "";
     if (hasError) {
         colorLabel = "error";
@@ -80,7 +82,7 @@ const CustomDateInput = ({ label, errorMessage, onChange, value, placeholder, ha
                         placeholder={placeholder}
                         disabled={disabled}
                         open={open}
-                        renderInput={(params) => <BootstrapInput {...params}
+                        renderInput={(params) => <BootstrapInput {...params} error={hasError}
                             endAdornment={
                                 <InputAdornment position="end" onClick={onClickCalendar} sx={{ cursor: 'pointer' }}>
                                     <CalendarMonthIcon />
@@ -92,5 +94,15 @@ const CustomDateInput = ({ label, errorMessage, onChange, value, placeholder, ha
             </FormControl>
         </div>
     );
+};
+
+CustomDateInput.propTypes = {
+    label: PropTypes.string,
+    errorMessage: PropTypes.string,
+    value: PropTypes.string,
+    placeholder: PropTypes.string,
+    disabled: PropTypes.bool,
+    hasError: PropTypes.bool.isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 export default CustomDateInput;

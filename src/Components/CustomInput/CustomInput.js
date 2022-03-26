@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Sizes from '../../Utils/Common/Sizes';
 import Colors from '../../Utils/Common/Colors';
+import PropTypes from 'prop-types';
 
 const BootstrapInput = styled(InputBase)(({ theme, error }) => {
 
@@ -43,7 +44,7 @@ const BootstrapInput = styled(InputBase)(({ theme, error }) => {
 });
 
 
-const CustomInput = ({ label, errorMessage, onChange, defaultValue, placeholder, hasError, type, disabled, value }) => {
+const CustomInput = ({ label, errorMessage, onChange, defaultValue, placeholder, hasError, type, disabled }) => {
 
     let colorLabel = "";
     if (hasError) {
@@ -60,7 +61,6 @@ const CustomInput = ({ label, errorMessage, onChange, defaultValue, placeholder,
                     defaultValue={defaultValue}
                     error={hasError}
                     disabled={disabled}
-                    value={value}
                     id="bootstrap-input"
                     size="small"
                     className="customInput"
@@ -73,4 +73,15 @@ const CustomInput = ({ label, errorMessage, onChange, defaultValue, placeholder,
     );
 };
 
+CustomInput.propTypes = {
+    label: PropTypes.string,
+    errorMessage: PropTypes.string,
+    value: PropTypes.string,
+    defaultValue: PropTypes.string,
+    type: PropTypes.string,
+    placeholder: PropTypes.string.isRequired,
+    hasError: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
+};
 export default CustomInput;
