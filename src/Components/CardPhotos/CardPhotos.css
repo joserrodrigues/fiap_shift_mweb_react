@@ -1,5 +1,5 @@
 .topCardPhotosEmpty{
-    margin-top: 40px !important;
+    margin-top: 20px !important;
     text-align: center;
 }
 
@@ -29,4 +29,19 @@
     min-width: 180px !important;
     margin-top: 0px !important;
     margin-bottom: 0px !important;    
+}
+
+.inputHiddenFile{
+    display: none;
+}
+
+.circularPhoto{
+    margin-right: 40px;
+}
+
+.deleteCardButtonDiv{
+    text-align: right;
+}
+.deleteCardButton{
+    margin-top: -10px !important;
 }
