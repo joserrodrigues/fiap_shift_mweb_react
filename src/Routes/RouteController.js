@@ -4,6 +4,7 @@ import DetailController from '../Screens/Detail/DetailController';
 import LoginController from '../Screens/Login/LoginController';
 import { Routes, Route } from "react-router-dom";
 import { InfoContext } from '../store/InfoContext';
+import AddController from '../Screens/Add/AddController';
 
 const RouteController = () => {
 
@@ -26,7 +27,7 @@ const RouteController = () => {
                 <Route path="/" element={<HomeController />} />
                 <Route path="detail">
                     <Route path=":infoID" element={<DetailController />} />
-                    <Route path="add" element={<DetailController />} />
+                    <Route path="add" element={<AddController />} />
                 </Route>
             </Routes>
         );
