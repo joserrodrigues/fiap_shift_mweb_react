@@ -1,79 +1,159 @@
-import './Home.css';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 
-function HomeView() {
+export default function HomeView() {
     return (
-        <Container>
-            <Row>
-                <Col sm={12} md={6} lg={4}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://picsum.photos/seed/picsum/300/200" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the bulk of
-                                the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
+        <Container maxWidth="xl">
+            <Grid container spacing={2}>
+                <Grid item xs={8} md={6} lg={4} xl={3}>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="https://picsum.photos/300/200"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small">Share</Button>
+                            <Button size="small">Learn More</Button>
+                        </CardActions>
                     </Card>
-                </Col>
-                <Col sm={12} md={6} lg={4}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://picsum.photos/seed/picsum/300/200" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the bulk of
-                                the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col sm={12} md={6} lg={4}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://picsum.photos/seed/picsum/300/200" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the bulk of
-                                the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col sm={12} md={6} lg={4}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://picsum.photos/seed/picsum/300/200" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the bulk of
-                                the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col sm={12} md={6} lg={4}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://picsum.photos/seed/picsum/300/200" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the bulk of
-                                the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
-                </Col>
+                </Grid>
 
-            </Row>
+                <Grid item xs={8} md={6} lg={4} xl={3}>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="https://picsum.photos/300/200"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small">Share</Button>
+                            <Button size="small">Learn More</Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+                <Grid item xs={8} md={6} lg={4} xl={3}>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="https://picsum.photos/300/200"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small">Share</Button>
+                            <Button size="small">Learn More</Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+
+                <Grid item xs={8} md={6} lg={4} xl={3}>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="https://picsum.photos/300/200"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small">Share</Button>
+                            <Button size="small">Learn More</Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+                <Grid item xs={8} md={6} lg={4} xl={3}>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="https://picsum.photos/300/200"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small">Share</Button>
+                            <Button size="small">Learn More</Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+
+                <Grid item xs={8} md={6} lg={4} xl={3}>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="https://picsum.photos/300/200"
+                            alt="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small">Share</Button>
+                            <Button size="small">Learn More</Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+            </Grid>
         </Container>
     );
 }
-
-export default HomeView;
