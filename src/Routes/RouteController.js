@@ -35,6 +35,7 @@ const RouteController = () => {
         return (
             <Routes>
                 <Route path="/" element={<LoginController />} />
+                <Route path="*" element={<LoginController />} />
             </Routes>
         );
     }

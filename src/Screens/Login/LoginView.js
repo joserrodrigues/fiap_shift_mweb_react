@@ -5,12 +5,16 @@ import logoImg from '../../Images/Logo.png'
 import './Login.css'
 import CustomInput from '../../Components/CustomInput/CustomInput';
 import { GoogleLogin } from 'react-google-login';
+import { Formik, Form } from "formik";
 
-
-const LoginView = ({ onClickLogin, isLoading, login, password, setLogin, setPassword, connectMessage, responseGoogle }) => {
+const LoginView = ({ onClickLogin, isLoading, connectMessage, responseGoogle, signInSchema }) => {
 
     let infoMessage = null;
-    let info = (<Button variant='primary' onClick={onClickLogin}>Entrar</Button>);
+    let info = (
+        <div className='buttonGoogleDiv'>
+            <Button variant='primary' type="submit">Entrar</Button>
+        </div>
+    );
     let buttonGoogle = (
         <div className='buttonGoogleDiv'>
             <GoogleLogin
@@ -38,7 +42,7 @@ const LoginView = ({ onClickLogin, isLoading, login, password, setLogin, setPass
     if (connectMessage !== "") {
         infoMessage = (
             <div className='infoErrorMessage'>
-                <Typography variant="minSize" color="error">{connectMessage}</Typography>
+                <Typography variant="minSize" color="error" >{connectMessage}</Typography>
             </div>
         )
     }
@@ -58,27 +62,43 @@ const LoginView = ({ onClickLogin, isLoading, login, password, setLogin, setPass
                 <Box className='boxLogin'>
                     <img src={logoImg} alt="Logo" width={'40px'} className="logo" />
                     <Typography variant="h1">Bem-vindo!</Typography>
-                    <CustomInput
-                        label="Digite seu e-mail"
-                        defaultValue={login}
-                        errorMessage=""
-                        placeholder="mario@cqb.com.br"
-                        hasError={false}
-                        value={login}
-                        onChange={(event) => setLogin(event.target.value)}
-                    />
-                    <CustomInput
-                        label="Digite sua senha"
-                        defaultValue={password}
-                        errorMessage=""
-                        placeholder="**************"
-                        hasError={false}
-                        type="password"
-                        onChange={(event) => setPassword(event.target.value)}
-                    />
-                    {infoMessage}
-                    {info}
-                    {buttonGoogle}
+                    <p></p>
+                    <Formik
+                        initialValues={{
+                            email: "",
+                            password: "",
+                        }}
+                        validationSchema={signInSchema}
+                        onSubmit={onClickLogin}>
+                        {(formik) => {
+                            const { errors, setFieldValue } = formik;
+                            return (
+                                <Form>
+                                    <CustomInput
+                                        label="Digite seu e-mail"
+                                        placeholder="mario@cqb.com.br"
+                                        errorMessage={errors.email}
+                                        hasError={errors.hasOwnProperty('email')}
+                                        onChange={e => setFieldValue('email', e.target.value)}
+                                    />
+                                    <p></p>
+                                    <CustomInput
+                                        label="Digite sua senha"
+                                        placeholder="**************"
+                                        type="password"
+                                        errorMessage={errors.password}
+                                        hasError={errors.hasOwnProperty('password')}
+                                        onChange={e => setFieldValue('password', e.target.value)}
+                                    />
+                                    {infoMessage}
+                                    {info}
+                                    {buttonGoogle}
+                                </Form>
+                            );
+
+                        }}
+                    </Formik >
+
 
                 </Box>
             </Grid>

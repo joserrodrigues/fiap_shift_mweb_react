@@ -3,13 +3,12 @@ import useAPI from '../../Services/APIs/Common/useAPI';
 import auth from '../../Services/APIs/Auth/Auth';
 import LoginView from './LoginView';
 import { InfoContext } from '../../store/InfoContext';
+import * as Yup from "yup";
 
 const LoginController = () => {
 
     const authLoginAPI = useAPI(auth.login);
     const authLoginGoogleAPI = useAPI(auth.loginGoogle);
-    const [login, setLogin] = useState("");
-    const [password, setPassword] = useState("");
 
     const [connectMessage, setConnectMessage] = useState("");
     const [connectCode, setConnectCode] = useState(0);
@@ -18,16 +17,13 @@ const LoginController = () => {
 
 
     const onClickLogin = (values) => {
-        // navigate(-1);
-        console.log("values");
-        console.log(login);
-        console.log(password);
 
         let infoSend = {
-            email: login,
-            password: password,
+            email: values.email,
+            password: values.password,
         }
 
+        setConnectMessage("");
         setIsLoading(true);
         authLoginAPI.requestPromise(infoSend)
             .then(info => {
@@ -37,11 +33,11 @@ const LoginController = () => {
             .catch((error) => {
                 setIsLoading(false);
                 setConnectCode(-1);
-                console.log(error.response);
-                if (error.response.status === 401) {
-                    setConnectMessage(error.response.data.message);
+                console.log(error.data);
+                if (error.status === 401) {
+                    setConnectMessage(error.data.message);
                 } else {
-                    setConnectMessage("O servidor retornou um erro= " + error.response.status);
+                    setConnectMessage("O servidor retornou um erro= " + error.status);
                 }
 
             })
@@ -55,6 +51,7 @@ const LoginController = () => {
             idGoogle: info.profileObj.googleId,
         }
 
+        setConnectMessage("");
         setIsLoading(true);
         authLoginGoogleAPI.requestPromise(infoSend)
             .then(info => {
@@ -74,18 +71,24 @@ const LoginController = () => {
             })
     }
 
+    const signInSchema = Yup.object().shape({
+        email: Yup.string().email().required("Email is required"),
+
+        password: Yup.string()
+            .required("Password is required")
+            .min(4, "Password is too short - should be 4 chars minimum"),
+    });
+
+
 
     return (
         <LoginView
-            login={login}
-            setLogin={setLogin}
-            password={password}
-            setPassword={setPassword}
             onClickLogin={onClickLogin}
             isLoading={isLoading}
             connectMessage={connectMessage}
             connectCode={connectCode}
             responseGoogle={onResponseGoogle}
+            signInSchema={signInSchema}
         />
     )
 }
