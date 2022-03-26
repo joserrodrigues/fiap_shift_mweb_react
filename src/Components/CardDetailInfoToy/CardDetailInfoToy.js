@@ -8,9 +8,8 @@ import CustomSelect from '../CustomSelect/CustomSelect';
 import CustomDateInput from '../CustomDateInput/CustomDateInput';
 import PropTypes from 'prop-types';
 import './CardDetailInfoToy.css'
-import format from 'date-fns/format'
 
-const CardDetailInfoToy = ({ signInSchema, onSubmit, isLoading }) => {
+const CardDetailInfoToy = ({ signInSchema, onSubmit, isLoading, isNewToy, toyInfo }) => {
 
     let listSelect = [];
     listSelect.push({ label: 'Novo', value: 1 });
@@ -18,16 +17,32 @@ const CardDetailInfoToy = ({ signInSchema, onSubmit, isLoading }) => {
     listSelect.push({ label: 'Usado - Condições Razoáveis', value: 3 });
     listSelect.push({ label: 'Usado - Sem condição de uso', value: 4 });
 
-    let button = (
-        <div className='buttonAddToyDiv'>
-            <Button
-                className='buttonAddToy'
-                variant="primary"
-                type="submit"
-            >Cadastrar Brinquedo</Button>
-        </div>
+    let button = null;
 
-    )
+    if (isNewToy) {
+        button = (
+            <div className='buttonAddToyDiv'>
+                <Button
+                    className='buttonAddToy'
+                    variant="primary"
+                    type="submit"
+                >Cadastrar brinquedo</Button>
+            </div>
+
+        )
+    } else {
+        button = (
+            <div className='buttonAddToyDiv'>
+                <Button
+                    className='buttonAddToy'
+                    variant="secondary"
+                    type="submit"
+                >Salvar alterações</Button>
+            </div>
+
+        )
+    }
+
     if (isLoading) {
         button = (
             <div className='circularAddToyDiv'>
@@ -38,11 +53,11 @@ const CardDetailInfoToy = ({ signInSchema, onSubmit, isLoading }) => {
     return (
         <Formik
             initialValues={{
-                name: "",
-                toyConditions: "",
-                toyCode: "",
-                donateDate: "",
-                donatedName: "",
+                name: !isNewToy ? toyInfo.name : "",
+                toyConditions: !isNewToy ? toyInfo.conditionType : "",
+                toyCode: !isNewToy ? toyInfo.code : "",
+                donateDate: !isNewToy ? toyInfo.receiveDate : "",
+                donatedName: !isNewToy ? toyInfo.receiveResponsable : "",
             }}
             validationSchema={signInSchema}
             onSubmit={onSubmit}>
@@ -61,6 +76,7 @@ const CardDetailInfoToy = ({ signInSchema, onSubmit, isLoading }) => {
                                             <CustomInput
                                                 label="Nome do brinquedo"
                                                 placeholder="Brinquedo de blocos"
+                                                value={values.name}
                                                 errorMessage={errors.name}
                                                 hasError={errors.hasOwnProperty('name')}
                                                 disabled={isLoading}
@@ -84,6 +100,7 @@ const CardDetailInfoToy = ({ signInSchema, onSubmit, isLoading }) => {
                                             <CustomInput
                                                 label="Código do brinquedo"
                                                 placeholder="#0021"
+                                                value={values.toyCode}
                                                 disabled={isLoading}
                                                 errorMessage={errors.toyCode}
                                                 hasError={errors.hasOwnProperty('toyCode')}
@@ -107,6 +124,7 @@ const CardDetailInfoToy = ({ signInSchema, onSubmit, isLoading }) => {
                                                 label="Doado por"
                                                 placeholder="Mariana Mendes da Silva"
                                                 disabled={isLoading}
+                                                value={values.donatedName}
                                                 errorMessage={errors.donatedName}
                                                 hasError={errors.hasOwnProperty('donatedName')}
                                                 onChange={e => setFieldValue('donatedName', e.target.value)}

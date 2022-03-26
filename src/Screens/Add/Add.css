@@ -8,4 +8,12 @@
 
 .mainImageDetail{
     border-radius: 30px;
+}   
+
+.buttonDonateClass{
+    width: 250px !important;
+}
+
+.circularProgressDonateStatus{
+    margin-right: 120px;
 }

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Container, Grid, Typography, Button, Stack, Snackbar } from '@mui/material';
+import { Box, Container, Grid, Typography, Button, Stack, Snackbar, CircularProgress } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Header from '../../Components/Header/Header';
 
 import './Add.css'
@@ -9,8 +10,9 @@ import sizes from '../../Utils/Common/Sizes';
 import CardPhotos from '../../Components/CardPhotos/CardPhotos';
 import CardDetailInfoToy from '../../Components/CardDetailInfoToy/CardDetailInfoToy';
 
-const AddView = ({ signInSchema, onSubmit, onChangeImage, onDeleteImage, onBack, isNewToy,
-    isLoading, mainImage, detailImage1, detailImage2, messageInfo, showMessageInfo, onCloseMessage }) => {
+const AddView = ({ signInSchema, onSubmit, onChangeImage, onDeleteImage, onBack, isNewToy, toyInfo,
+    isLoading, mainImage, detailImage1, detailImage2, messageInfo, showMessageInfo, onCloseMessage,
+    statusToy, onChangeToyStatus }) => {
 
 
     let topPageInfo = null;
@@ -24,20 +26,50 @@ const AddView = ({ signInSchema, onSubmit, onChangeImage, onDeleteImage, onBack,
             </>
         );
     } else {
+
+        let topPageStatusDonate = null;
+        if (statusToy === 1) {
+            topPageStatusDonate = (
+                <>
+                    <CheckCircleOutlineIcon color="success" sx={{ fontSize: sizes.FontSizeMD }} />
+                    <Typography variant="body1" >
+                        Disponível para doação
+                    </Typography>
+                </>
+            );
+            topButtonDonate = (
+                <Button variant='primary' className='buttonDonateClass' onClick={onChangeToyStatus}>Marcar como doado</Button>
+            );
+
+        } else {
+            topPageStatusDonate = (
+                <>
+                    <HighlightOffIcon color="error" sx={{ fontSize: sizes.FontSizeMD }} />
+                    <Typography variant="body1" >
+                        Indisponível para doação
+                    </Typography>
+                </>
+            );
+            topButtonDonate = (
+                <Button variant='primary' className='buttonDonateClass' onClick={onChangeToyStatus}>Marcar como disponível</Button>
+            );
+        }
+
+        if (isLoading) {
+            topButtonDonate = (
+                <CircularProgress size={14} className="circularProgressDonateStatus" />
+            );
+        }
+
         topPageInfo = (
             <>
                 <Typography variant="h1" >
-                    Bloco de Silicone
+                    {toyInfo.name}
                 </Typography>
-                <CheckCircleOutlineIcon color="success" sx={{ fontSize: sizes.FontSizeMD }} />
-                <Typography variant="body1" >
-                    Disponível para doação
-                </Typography>
+                {topPageStatusDonate}
             </>
         );
-        topButtonDonate = (
-            <Button variant='disabled' className='buttonClass'>Marcar como doado</Button>
-        );
+
     }
     return (
         <Container fixed className="container" maxWidth="lg">
@@ -82,7 +114,8 @@ const AddView = ({ signInSchema, onSubmit, onChangeImage, onDeleteImage, onBack,
                         />
                     </Grid>
                     <Grid item md={12} lg={7} className="titlePage">
-                        <CardDetailInfoToy onSubmit={onSubmit} signInSchema={signInSchema} isLoading={isLoading} />
+                        <CardDetailInfoToy onSubmit={onSubmit} signInSchema={signInSchema} isLoading={isLoading}
+                            isNewToy={isNewToy} toyInfo={toyInfo} />
                     </Grid>
                     <Snackbar
                         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}

@@ -1,6 +1,7 @@
 .toysTitleCard{
   font-weight: bold !important;  
   height: 40px;
+  cursor: pointer;
 }
 
 .itemClass{
@@ -11,4 +12,11 @@
 .cardClass {
   max-width: 345px !important;
   border-radius: 20px !important;
+}
+
+.deleteMainCardButton{
+  width: 100%;
+  justify-content: right !important;
+  margin-top: -31px !important;
+  padding: 0px !important;
 }

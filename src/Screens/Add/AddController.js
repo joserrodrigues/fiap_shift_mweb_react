@@ -10,21 +10,37 @@ import { Alert } from '@mui/material';
 
 const AddController = () => {
 
+
+    const { state: { toy, latitude, longitude } } = useLocation();
+
+    //Checking by new Toy
+    let isNewToy = true;
+    let toyInfo = null;
+    let imageInitInfo = ["", "", ""];
+    let statusToyInit = 1;
+    if (toy && toy !== "") {
+        toyInfo = JSON.parse(toy);        
+        isNewToy = false;
+        statusToyInit = toyInfo.status;
+        imageInitInfo = [toyInfo.mainImage, toyInfo.detailImage1, toyInfo.detailImage2];
+    }
+
     const [isLoading, setIsLoading] = useState(false)
-    const [mainImg, setMainImg] = useState("");
-    const [detailImg1, setDetailImg1] = useState("");
-    const [detailImg2, setDetailImg2] = useState("");
+    const [mainImg, setMainImg] = useState(imageInitInfo[0]);
+    const [detailImg1, setDetailImg1] = useState(imageInitInfo[1]);
+    const [detailImg2, setDetailImg2] = useState(imageInitInfo[2]);
+    const [statusToy, setStatusToy] = useState(statusToyInit);
     const [showMessageInfo, setShowMessageInfo] = useState(false);
     const [messageInfo, setMessageInfo] = useState(null);
     const context = useContext(InfoContext);
 
-    const { state: { latitude, longitude } } = useLocation();
-
     const uploadToysPhotoAPI = useAPI(toys.uploadToysPhoto);
     const addToyAPI = useAPI(toys.addToy);
+    const editToyAPI = useAPI(toys.editToy);
 
-    const isNewToy = true;
     const navigate = useNavigate();
+
+
     const signInSchema = Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
         toyCode: Yup.string().required("Código é obrigatório"),
@@ -49,6 +65,15 @@ const AddController = () => {
             'yyyy-MM-dd'
         )
 
+        if (isNewToy) {
+            addToy(values, convertedDate)
+        } else {
+            editToy(values, convertedDate)
+        }
+
+    }
+
+    const addToy = (values, convertedDate) => {
         let infoSend = {
             name: values.name,
             mainImage: mainImg,
@@ -79,7 +104,47 @@ const AddController = () => {
                 setIsLoading(false);
                 setMessageInfo(
                     <Alert severity="error">
-                        Erro ao cadastrar brinquedo {error.code}
+                        Erro ao cadastrar brinquedo {error.status}
+                    </Alert>
+                )
+                setShowMessageInfo(true);
+                console.log(error);
+            })
+    }
+
+    const editToy = (values, convertedDate) => {
+        let infoSend = {
+            toyID: toyInfo._id,
+            name: values.name,
+            mainImage: mainImg,
+            detailImage1: detailImg1,
+            detailImage2: detailImg2,
+            conditionType: values.toyConditions,
+            code: values.toyCode,
+            receiveDate: convertedDate,
+            receiveResponsable: values.donatedName,
+            latitude: latitude,
+            longitude: longitude,
+            status: statusToy,
+        }
+        setIsLoading(true);
+        editToyAPI.requestPromise(context.tokenLogin, infoSend)
+            .then(info => {
+                setMessageInfo(
+                    <Alert severity="success">
+                        Brinquedo salvo com sucesso
+                    </Alert>
+                )
+                setShowMessageInfo(true);
+                setTimeout(() => {
+                    navigate(-1);
+                }, 3000);
+            })
+            .catch(error => {
+                setIsLoading(false);
+                setMessageInfo(
+                    <Alert severity="error">
+                        Erro ao editar o brinquedo {error.status}
                     </Alert>
                 )
                 setShowMessageInfo(true);
@@ -108,9 +173,14 @@ const AddController = () => {
             })
             .catch(error => {
                 setIsLoading(false);
+                console.log(error);
+                let messageError = "";
+                if (error.data && error.data.message) {
+                    messageError = error.data.message
+                }
                 setMessageInfo(
                     <Alert severity="error">
-                        Erro ao enviar a imagem {error.code}
+                        Erro ao enviar a imagem {error.status} {messageError}
                     </Alert>
                 )
                 setShowMessageInfo(true);
@@ -131,18 +201,23 @@ const AddController = () => {
         if (reason === 'clickaway') {
             return;
         }
-
         setShowMessageInfo(false);
     };
 
+    const onChangeToyStatus = () => {
+        setStatusToy((statusToy) => {
+            return statusToy === 0 ? 1 : 0;
+        });
+    }
     const onBack = () => {
         navigate(-1);
     }
     return (
         <AddView onSubmit={onSubmit} signInSchema={signInSchema} onChangeImage={onChangeImage} onDeleteImage={onDeleteImage}
-            isNewToy={isNewToy} onBack={onBack} isLoading={isLoading}
+            isNewToy={isNewToy} toyInfo={toyInfo} onBack={onBack} isLoading={isLoading}
             mainImage={mainImg} detailImage1={detailImg1} detailImage2={detailImg2}
-            messageInfo={messageInfo} showMessageInfo={showMessageInfo} onCloseMessage={onCloseMessage} />
+            messageInfo={messageInfo} showMessageInfo={showMessageInfo} onCloseMessage={onCloseMessage}
+            statusToy={statusToy} onChangeToyStatus={onChangeToyStatus} />
     );
 };
 

@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Grid } from '@mui/material';
 import MaterialTable from 'material-table';
 import Colors from '../../Utils/Common/Colors'
 
-const ToysTableView = ({ loading, goToPage, getDataPage }) => {
+const ToysTableView = ({ loading, goToPage, getDataPage, onDeleteToy, tableRef }) => {
 
     const columns = [
         { title: 'Nome', field: 'name', },
@@ -12,9 +13,10 @@ const ToysTableView = ({ loading, goToPage, getDataPage }) => {
     ];
 
     return (
-        <Grid item lg={12} xl={12} className="titleButton">
+        <Grid item lg={12} xl={12}>
             <MaterialTable
                 xs={12}
+                tableRef={tableRef}
                 title="Remote Data Preview"
                 columns={columns}
                 className="customTable"
@@ -23,9 +25,16 @@ const ToysTableView = ({ loading, goToPage, getDataPage }) => {
                 actions={[
                     {
                         icon: 'visibility',
-                        tooltip: 'See Detail',
+                        tooltip: 'Ver detalhe',
                         onClick: (event, rowData) => {
                             goToPage(rowData)
+                        }
+                    },
+                    {
+                        icon: 'delete',
+                        tooltip: 'Apagar brinquedo',
+                        onClick: (event, rowData) => {
+                            onDeleteToy(rowData)
                         }
                     }
                 ]}

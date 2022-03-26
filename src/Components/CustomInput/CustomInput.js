@@ -9,8 +9,8 @@ import Sizes from '../../Utils/Common/Sizes';
 import Colors from '../../Utils/Common/Colors';
 import PropTypes from 'prop-types';
 
-const BootstrapInput = styled(InputBase)(({ theme, error }) => {
-
+const BootstrapInput = styled(InputBase)(({ theme, error }) => { 
+    
     let borderNormal = '1px solid ' + Colors.NeutralMedium
     let borderFocused = '2px solid ' + Colors.SecondaryMedium
     if (error) {
@@ -44,11 +44,11 @@ const BootstrapInput = styled(InputBase)(({ theme, error }) => {
 });
 
 
-const CustomInput = ({ label, errorMessage, onChange, defaultValue, placeholder, hasError, type, disabled }) => {
+const CustomInput = ({ label, errorMessage, onChange, defaultValue, placeholder, hasError, type, disabled, value }) => {
 
     let colorLabel = "";
-    if (hasError) {
-        colorLabel = "error";
+    if (hasError){
+        colorLabel="error";
     }
 
     return (
@@ -58,15 +58,16 @@ const CustomInput = ({ label, errorMessage, onChange, defaultValue, placeholder,
                     {label}
                 </InputLabel>
                 <BootstrapInput
-                    defaultValue={defaultValue}
+                    defaultValue={defaultValue} 
+                    value={value}
                     error={hasError}
                     disabled={disabled}
-                    id="bootstrap-input"
+                    id="bootstrap-input" 
                     size="small"
                     className="customInput"
                     onChange={onChange}
                     placeholder={placeholder}
-                    type={type} />
+                    type={type}/>     
                 <Typography variant="minSize" color={colorLabel} className="labelMessageCustomInput">{errorMessage}</Typography>
             </FormControl>
         </div>

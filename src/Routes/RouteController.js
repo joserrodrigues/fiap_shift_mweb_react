@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import HomeController from '../Screens/Home/HomeController';
-import DetailController from '../Screens/Detail/DetailController';
 import LoginController from '../Screens/Login/LoginController';
 import { Routes, Route } from "react-router-dom";
 import { InfoContext } from '../store/InfoContext';
@@ -26,7 +25,7 @@ const RouteController = () => {
             <Routes>
                 <Route path="/" element={<HomeController />} />
                 <Route path="detail">
-                    <Route path=":infoID" element={<DetailController />} />
+                    <Route path=":infoID" element={<AddController />} />
                     <Route path="add" element={<AddController />} />
                 </Route>
             </Routes>
