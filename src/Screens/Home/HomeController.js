@@ -1,63 +1,54 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import useIsOdd from '../../Utils/Common/useIsOdd';
 import HomeView from './HomeView'
 
-class HomeController extends React.Component {
 
-    constructor(props) {
-        super(props);
+const HomeController = () => {
 
-        //gerando logs da props
-        console.log(" Chamando constructor() ");
-        console.log(props);
+    const [count, setCount] = useState(0);
+    const interval = useRef(null);
 
-        this.state = {
-            count: 0,
-        }; //inicializando o state
-
-        //Inicializando o timeout
-        this.interval = setInterval(() => {
+    useEffect(() => {
+        console.log("Executa na montagem do componente");
+        interval.current = setInterval(() => {
             //atualizando o contador
             console.log(" Atualizando a classe ");
-            this.setState({
-                count: this.state.count + 1
+            setCount((count) => {
+                return count + 1
             })
         }, 3000);
-    }
 
-    componentDidMount() {
-        console.log(" Chamando componentDidMount ");
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        //Só irá atualizar quando o count for diferente de 1
-        if (this.state.count === 1) {
-            console.log(" Chamando shouldComponentUpdate = false ");
-            return false;
-        } else {
-            console.log(" Chamando shouldComponentUpdate = true ");
-            return true;
+        return () => {
+            console.log("Executa na desmontagem do componente");
+            clearInterval(interval.current);
         }
-    }
+    }, []);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(" Chamando componentDidUpdate ");
-    }
 
-    componentWillUnmount() {
-        clearInterval(this.interval)
-        console.log(" Chamando componentWillUnmount ");
-    }
+    useEffect(() => {
+        console.log("Executa na renderização do componente");
+        return () => {
+            console.log("Executa antes de realizar a renderização");
+        }
+    });
 
-    render() {
-        console.log(" Chamando Render " + this.state.count);
-        return (
-            //Chamando o View e passando o props count_info
-            <HomeView
-                count={this.state.count}
-            />
-        )
-    }
+    //Esse useEffect é invocado sempre que o valor do count é alterado
+    useEffect(() => {
+        console.log("Executa na alteração do information");
+        return () => {
+            console.log("Executa antes de executar o render ao alterar o valor do information");
+        }
+    }, [count]);
 
+    console.log(" Chamando Render " + count);
+    let isOdd = useIsOdd(count);
+    return (
+        //Chamando o View e passando o props count_info
+        <HomeView
+            count={count}
+            isOdd={isOdd}
+        />
+    )
 
 }
 export default HomeController;
