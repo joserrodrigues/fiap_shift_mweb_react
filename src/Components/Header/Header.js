@@ -31,10 +31,10 @@ const Header = () => {
                 alignItems="center"
                 className='gridHeader'
             >
-                <Grid item xs={12} md={6} xl={6} className="leftHeader">
+                <Grid item xs={4} md={6} xl={6} className="leftHeader">
                     <img src={logoImg} alt="children" width={'50px'} className="logo Img" />
                 </Grid>
-                <Grid item xs={12} md={6} xl={6} className="rightHeader">
+                <Grid item xs={8} md={6} xl={6} className="rightHeader">
                     <Stack direction="row" className="rightHeader">
                         <Stack direction="column" className="rightHeader">
                             <Typography variant="h2" >

@@ -6,8 +6,7 @@ import MuiThemes from './Utils/Common/MuiThemes';
 import { BrowserRouter } from "react-router-dom";
 import Routes from './Routes/RouteController';
 import { InfoContextProvider } from './store/InfoContext';
-
-
+import serviceWorker from './serviceworker';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,3 +25,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+serviceWorker.registerServiceWorker();

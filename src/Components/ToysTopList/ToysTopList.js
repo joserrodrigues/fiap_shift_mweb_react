@@ -20,10 +20,12 @@ const ToysTopList = ({ addToy, onChangeView, viewType }) => {
         colorTable = "primary";
         colorCard = "";
     }
-    return (
-        <>
-            <Grid item lg={6} xl={6} className="ViewInfo">
-                <Stack direction="row">
+
+    let chooseView = null;
+    if (window.innerWidth > 1000){
+        chooseView = (
+            <Grid item xs={12} md={6} lg={6} xl={6} className="ViewInfo">
+                <Stack direction="row" className='stackViewInfo'>
                     <div className={classCard} onClick={() => onChangeView("cards")}>
                         <DashboardIcon color={colorCard} />
                     </div>
@@ -31,11 +33,13 @@ const ToysTopList = ({ addToy, onChangeView, viewType }) => {
                         <TableViewIcon color={colorTable} />
                     </div>
                 </Stack>
-
-
-
             </Grid>
-            <Grid item lg={6} xl={6} className="toysTopButton">
+        );
+    }
+    return (
+        <>
+            {chooseView}
+            <Grid item xs={12} md={6} lg={6} xl={6} className="toysTopButton">
                 <Button variant='primary' className='buttonClass' onClick={addToy}>Cadastrar brinquedo</Button>
             </Grid>
         </>

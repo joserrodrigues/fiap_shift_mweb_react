@@ -16,10 +16,21 @@
     
 }
 
+.buttonClass{
+  width: 220px !important;
+}
+
 .toysTopButton{
   text-align: right;
 }
+@media only screen and (max-width: 1000px) {
+  .toysTopButton{
+    text-align: center;
+  }
 
-.buttonClass{
-  width: 220px !important;
+  .stackViewInfo{
+    text-align: right;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
 }

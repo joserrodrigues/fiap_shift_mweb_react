@@ -33,12 +33,13 @@ export default function HomeView({ loading, arrayToys, goToPage, info, getDataPa
                     </Grid>
                     <ToysTopList onChangeView={onChangeViewType} viewType={viewType} addToy={addToy} />
 
-                    <Grid item lg={12} xl={12} >
+                    <Grid item lg={12} xl={12} sx={{ width: '100%' }} >
                         {renderIf(viewType === "cards")(
                             <ToysCardsView loading={isLoading} arrayToys={arrayToys} goToPage={goToPage} onDeleteToy={onDeleteToy} />
                         )}
                         {renderIf(viewType === "table")(
-                            <ToysTableView loading={isLoading} goToPage={goToPage} getDataPage={getDataPage} onDeleteToy={onDeleteToy} tableRef={tableRef} />
+                            <ToysTableView loading={isLoading} goToPage={goToPage} getDataPage={getDataPage} onDeleteToy={onDeleteToy}
+                             tableRef={tableRef} />
                         )}
                     </Grid>
                 </Grid>

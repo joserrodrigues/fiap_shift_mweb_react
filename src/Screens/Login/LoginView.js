@@ -53,7 +53,7 @@ const LoginView = ({ onClickLogin, isLoading, connectMessage, responseGoogle, si
             alignItems="center"
             justifyContent="center"
             className='gridClass'>
-            <Grid item md={6} sm={6} >
+            <Grid item md={6} sm={12} >
                 <Box className='boxImg'>
                     <img src={childrenImg} alt="children" width={'60%'} className="childrenImg" />
                 </Box>

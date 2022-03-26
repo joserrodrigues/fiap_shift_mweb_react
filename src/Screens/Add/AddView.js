@@ -30,12 +30,12 @@ const AddView = ({ signInSchema, onSubmit, onChangeImage, onDeleteImage, onBack,
         let topPageStatusDonate = null;
         if (statusToy === 1) {
             topPageStatusDonate = (
-                <>
+                <Stack spacing={1} direction="row" alignItems="center">
                     <CheckCircleOutlineIcon color="success" sx={{ fontSize: sizes.FontSizeMD }} />
                     <Typography variant="body1" >
                         Disponível para doação
                     </Typography>
-                </>
+                </Stack>
             );
             topButtonDonate = (
                 <Button variant='primary' className='buttonDonateClass' onClick={onChangeToyStatus}>Marcar como doado</Button>
@@ -43,12 +43,12 @@ const AddView = ({ signInSchema, onSubmit, onChangeImage, onDeleteImage, onBack,
 
         } else {
             topPageStatusDonate = (
-                <>
+                <Stack spacing={1} direction="row" alignItems="center">
                     <HighlightOffIcon color="error" sx={{ fontSize: sizes.FontSizeMD }} />
                     <Typography variant="body1" >
                         Indisponível para doação
                     </Typography>
-                </>
+                </Stack>
             );
             topButtonDonate = (
                 <Button variant='primary' className='buttonDonateClass' onClick={onChangeToyStatus}>Marcar como disponível</Button>
@@ -62,12 +62,21 @@ const AddView = ({ signInSchema, onSubmit, onChangeImage, onDeleteImage, onBack,
         }
 
         topPageInfo = (
-            <>
-                <Typography variant="h1" >
-                    {toyInfo.name}
-                </Typography>
-                {topPageStatusDonate}
-            </>
+            <Grid
+                container
+                spacing={3}
+                alignItems="center"
+            >
+                <Grid item lg={12} xl={12}>
+                    <Typography variant="h1" md={12} >
+                        {toyInfo.name}
+                    </Typography>
+                </Grid>                
+                <Grid item lg={12} xl={12} className="titleInfoDonateDiv">
+                    {topPageStatusDonate}
+                </Grid>
+                
+            </Grid>
         );
 
     }
@@ -95,12 +104,12 @@ const AddView = ({ signInSchema, onSubmit, onChangeImage, onDeleteImage, onBack,
                             spacing={3}
                             alignItems="center"
                         >
-                            <Grid item md={8} className="titlePage">
+                            <Grid item md={12} lg={8} className="titlePage">
                                 <Stack spacing={1} direction="row" alignItems="center">
                                     {topPageInfo}
                                 </Stack>
                             </Grid>
-                            <Grid item md={4} className="buttonDonateDiv">
+                            <Grid item md={12} lg={4} className="buttonDonateDiv">
                                 {topButtonDonate}
                             </Grid>
                         </Grid>
